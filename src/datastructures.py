@@ -13,55 +13,46 @@ class FamilyStructure:
 
         # example list of members
         self._members = [
-            {'name': 'John Jackson',
-              'age': 33,
-              'lucky_numbers': [7,11,33],
-              'id': 1     
+            {
+            "id": 1,
+            "first_name": "John Jackson",
+            "age": 33 ,
+            "lucky_numbers":[7, 13, 22],
             },
-            {'name': 'Jane Jackson',
-              'age': 35,
-              'lucky_numbers': [8,1,10],
-              'id': 2      
+            {
+            "id": 2,
+            "first_name": "Jane Jackson",
+            "age": 35,
+            "lucky_numbers":[10, 14, 3],
             },
-            {'name': 'Jimmy Jackson',
-              'age': 5,
-              'lucky_numbers': [5,6,9],
-              'id': 3     
-            }
-        ]
+            {
+            "id": 3,
+            "first_name": "Jimmy Jackson",
+            "age": 5 ,
+            "lucky_numbers":[1],
+            },]
 
-    # read-only: Use this method to generate random members ID's when adding members into the list
     def _generateId(self):
         return randint(0, 99999999)
 
-    def add_member(self, new_member):
+    def add_member(self, member):
         # fill this method and update the return
-        id_to_add = self._generateId()
-        duplicate = filter(lambda member: id_to_add == member["id"], self._members)
-        if not duplicate:
-            return add_member(member)
-        else:
-            new_member['id'] = id_to_add
-            self._members.append(new_member)
-            return self._members
+        self._members.append(member)
+        return self
 
     def delete_member(self, id):
         # fill this method and update the return
-        result = list(filter(lambda member: member['id'] != id, self._members))
-        if len(result) == len(self._members):
-            raise APIException('ID not found',400)
-        else:
-            member_to_delete = self.get_member(id)
-            self._members.remove(member_to_delete)
-            return self._members
-
+        for position, member in enumerate(self._members): 
+            if member["id"] == int(id): 
+                kicked_member = self._members.pop(position) 
+        return kicked_member 
+        
     def get_member(self, id):
         # fill this method and update the return
-        for x in self._members:
-            if x['id'] == id:
-                member = x
-        return member
-   
+        for member in self._members:
+            if member["id"] == int(id): 
+                return member
+        
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
         return self._members
