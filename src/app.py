@@ -57,9 +57,9 @@ def add_member():
         "id": request.json.get("id")
     }
 
-    status = jackson_family.add_member(member)
+    state = jackson_family.add_member(member)
 
-    if status:
+    if state:
         return jsonify(member), 200
     else:
         return jsonify("Member is not added"), 400
@@ -68,9 +68,9 @@ def add_member():
 @app.route("/member/<int:member_id>", methods = ["DELETE"])
 def kick_member(member_id):
 
-    status = jackson_family.delete_member(member_id)
+    state = jackson_family.delete_member(member_id)
 
-    if status:
+    if state:
         return jsonify({"done": True}), 200
     else:
         return jsonify("Member doesn't exists"), 400
