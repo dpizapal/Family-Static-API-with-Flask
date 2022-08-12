@@ -41,7 +41,7 @@ class FamilyStructure:
         #Fill this method and update the return
         if(not member["id"]):
             member["id"] = self._generateId()
-        #To avoid repeated ID
+        #Don´t repeat Id's
         for new_member in self._members:
             if(member["id"] == new_member["id"]):
                 member["id"] = self._generateId() 
