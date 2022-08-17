@@ -39,12 +39,17 @@ def handle_hello():
     if members:
         return jsonify(members), 200
     else:
-        return jsonify(members), 400
+        return jsonify({"Bad Request"}), 400
 
 #GET member-----------------
 @app.route("/member/<int:member_id>", methods=["GET"])
 def get_member(member_id):
-    return jsonify(jackson_family.get_member(member_id)), 200
+    member = jackson_family.get_member(member_id)
+    if member:
+        return jsonify(member), 200
+    else:
+        return jsonify({"error"}), 404
+    
 
 
 #POST-------------------
